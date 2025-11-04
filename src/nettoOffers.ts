@@ -76,7 +76,7 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
     const selector = `.product-list.clearfix.js-store-products-page-${pageNumber}`
     try {
         // Warten, bis die Angebotskacheln geladen sind
-        await page.waitForSelector(selector, { state: "attached", timeout: 5000 })
+        await page.waitForSelector(selector, { state: "attached", timeout: 6000 })
 
         // Alle ArtikelTiles auslesen
         const offers: Offer[] = await page.$eval(selector,
