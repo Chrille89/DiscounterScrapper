@@ -1,0 +1,22 @@
+export const meatKeywords = [
+    "huhn",
+    "rind",
+    "hähnchen",
+    "brust",
+    "filet",
+    "schnitzel",
+    "ente",
+    "gans",
+    "schulter",
+    "haxe",
+    "eisbein",
+    "bauch",
+    "hüft",
+    "nacken",
+    "kotelett",
+    "kasseler",
+    "rücken",
+    "fisch",
+    "schwein",
+    "hack"
+];

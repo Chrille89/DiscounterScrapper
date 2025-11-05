@@ -1,29 +1,7 @@
 import { chromium } from 'playwright';
 import { Page } from 'playwright';
 import { Offer } from './types/offer.type';
-
-const keywords = [
-    "huhn",
-    "rind",
-    "hähnchen",
-    "brust",
-    "filet",
-    "schnitzel",
-    "ente",
-    "gans",
-    "schulter",
-    "haxe",
-    "eisbein",
-    "bauch",
-    "hüft",
-    "nacken",
-    "kotelett",
-    "kasseler",
-    "rücken",
-    "fisch",
-    "schwein",
-    "hack"
-];
+import { meatKeywords } from './meatKeywords';
 
 async function autoScroll(page: Page) {
     await page.evaluate(async () => {
@@ -70,7 +48,7 @@ export async function getAldiOffers() {
             })
         );
 
-        return offers.filter(o => keywords.some(word => o.title.toLowerCase().includes(word)));
+        return offers.filter(o => meatKeywords.some(word => o.title.toLowerCase().includes(word)));
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {

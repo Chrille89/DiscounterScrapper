@@ -1,12 +1,20 @@
 import { getAldiOffers } from "./aldiOffers"
+import { getNettoDiscountOffers } from "./nettoDiscountOffers"
 import { getNettoOffers } from "./nettoOffers"
 
 
 (async () => {
+    console.time("Load offers");
+
     let offers = await getAldiOffers()
-    let nettoOffers = await getNettoOffers()
+    let nettoOffers = await getNettoDiscountOffers()
     if (nettoOffers)
         offers?.push(...nettoOffers)
+
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/spar-stars/") ?? [])
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/regionale-produkte/") ?? [])
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/hammer-donnerstag/") ?? [])        
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/knaller-wochenende/") ?? [])
 
     offers = offers?.sort((a, b) => a.priceBase - b.priceBase).slice(0, 3)
 
@@ -23,5 +31,7 @@ import { getNettoOffers } from "./nettoOffers"
         body: JSON.stringify(offers),
     })
     console.log("POST-Response: ",await response.json())
+    console.timeEnd("Load offers");
+
 
 })()
