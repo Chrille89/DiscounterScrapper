@@ -1,4 +1,5 @@
 export const meatKeywords = [
+    "schwein",
     "huhn",
     "rind",
     "hähnchen",
@@ -7,6 +8,8 @@ export const meatKeywords = [
     "schnitzel",
     "ente",
     "gans",
+    "gänse",
+    "puten",
     "schulter",
     "haxe",
     "eisbein",
@@ -17,6 +20,8 @@ export const meatKeywords = [
     "kasseler",
     "rücken",
     "fisch",
-    "schwein",
     "hack"
 ];
+
+export const blacklist = ["enteiser"]; 
+

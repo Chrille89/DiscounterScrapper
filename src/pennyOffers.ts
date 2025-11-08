@@ -1,8 +1,9 @@
 
 import { chromium } from "playwright-extra";
 import { Offer } from './types/offer.type';
-import { meatKeywords } from "./meatKeywords";
+import { blacklist, meatKeywords } from "./helper/meatKeywords";
 import { autoScroll } from "./helper/autoScroll";
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 export async function getPennyOffers() {
     const browser = await chromium.launch({ headless: true });
@@ -28,23 +29,16 @@ export async function getPennyOffers() {
         const offers: Offer[] = await page.$$eval('.tile-list__item', nodes =>
             nodes.map(n => {
                 const title = n.querySelector(".h4.offer-tile__headline")?.textContent?.trim() || '';
-                const amount =  n.querySelector(".offer-tile__unit-price")?.textContent?.trim().split("(")[0] || ''; 
-                const price =  Number(n.querySelector(".bubble__price-value")?.textContent?.trim());
-                const priceOld =  n.querySelector(".bubble__small-value")?.textContent?.trim() || ''; 
-                const priceBase = Number(n.querySelector(".offer-tile__unit-price")?.textContent?.trim().includes("=") ? 
-                n.querySelector(".offer-tile__unit-price")?.textContent?.trim().split("=")[1].replace(")","") : price);
-                const percentSaving = n.querySelector(".offer-tile__badges.badge__container")?.textContent?.trim() || ''; 
+                const amount = n.querySelector(".offer-tile__unit-price")?.textContent?.trim().split("(")[0] || '';
+                const price = Number(n.querySelector(".bubble__price-value")?.textContent?.trim());
+                const priceOld = n.querySelector(".bubble__small-value")?.textContent?.trim() || '';
+                const priceBase = Number(n.querySelector(".offer-tile__unit-price")?.textContent?.trim().includes("=") ?
+                    n.querySelector(".offer-tile__unit-price")?.textContent?.trim().split("=")[1].replace(")", "") : price);
+                const percentSaving = n.querySelector(".offer-tile__badges.badge__container")?.textContent?.trim() || '';
                 return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Penny" };
             })
         );
-
-        let filteredOffers = offers.filter(
-            (offer, index, self) =>
-                (index === self.findIndex((o) => o.title === offer.title)) &&
-                (meatKeywords.some(word => offer.title.toLowerCase().includes(word))
-                )
-        );
-        return filteredOffers
+        return filterOffersByKeywords(offers, meatKeywords, blacklist);
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {

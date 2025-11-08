@@ -1,8 +1,9 @@
 import { chromium } from 'playwright';
 import { Page } from 'playwright';
 import { Offer } from './types/offer.type';
-import { meatKeywords } from './meatKeywords';
+import { blacklist, meatKeywords } from './helper/meatKeywords';
 import { autoScroll } from './helper/autoScroll';
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 export async function getAldiOffers() {
     const browser = await chromium.launch({ headless: true });
@@ -29,8 +30,7 @@ export async function getAldiOffers() {
                 return { title, amount,price,priceOld, percentSaving, priceBase, discounter : "Aldi" };
             })
         );
-
-        return offers.filter(o => meatKeywords.some(word => o.title.toLowerCase().includes(word)));
+        return filterOffersByKeywords(offers, meatKeywords, blacklist);
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {

@@ -3,11 +3,14 @@ import { getNettoDiscountOffers } from "./nettoDiscountOffers"
 import { getNettoOffers } from "./nettoOffers"
 import { getPennyOffers } from "./pennyOffers";
 import { getReweOffers } from "./reweOffer";
-
+import { getNormaOffers } from "./normaOffers";
 
 (async () => {
     console.time("Load offers");
     
+    let offers = await getNormaOffers()
+    console.log("Norma offers found: ", offers);
+    /*
     // ALDI
     let offers = await getAldiOffers()
 
@@ -42,7 +45,7 @@ import { getReweOffers } from "./reweOffer";
         },
         body: JSON.stringify(offers),
     })
-    console.log("POST-Response: ",await response.json())
+    console.log("POST-Response: ",await response.json())*/
     console.timeEnd("Load offers");
 
 })()

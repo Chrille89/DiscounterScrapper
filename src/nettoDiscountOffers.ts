@@ -2,7 +2,8 @@ import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { Page } from "playwright";
 import { Offer } from './types/offer.type';
-import { meatKeywords } from "./meatKeywords";
+import { blacklist, meatKeywords } from "./helper/meatKeywords";
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 chromium.use(StealthPlugin());
 
@@ -35,15 +36,8 @@ export async function getNettoDiscountOffers() {
             }
 
         }
-
         // Nach dem Einlesen der Angebote
-        let filteredOffers = offers.filter(
-            (offer, index, self) =>
-                (index === self.findIndex((o) => o.title === offer.title)) &&
-                (meatKeywords.some(word => offer.title.toLowerCase().includes(word))
-                )
-        );
-        return filteredOffers
+        return filterOffersByKeywords(offers, meatKeywords, blacklist);
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {
