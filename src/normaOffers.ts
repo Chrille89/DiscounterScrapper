@@ -19,19 +19,19 @@ export async function getNormaOffers() {
             domain: "www.norma-online.de",
             path: "/",
         },
-         {
+        {
             name: "NORMA_banner",
             value: "1", // deine gewünschte Filial-ID
             domain: "www.norma-online.de",
             path: "/",
         },
-         {
+        {
             name: "NORMA_cache",
             value: "MD", // deine gewünschte Filial-ID
             domain: "www.norma-online.de",
             path: "/",
         },
-         {
+        {
             name: "NORMA_tracking",
             value: "Slider,2025_kw46_mo_coupons", // deine gewünschte Filial-ID
             domain: "www.norma-online.de",
@@ -52,22 +52,22 @@ export async function getNormaOffers() {
         // navigate to offers page from monday
         await page.waitForSelector(".subnav.subnav-1")
         await page.click('#js-getheight > li.l-42.lvl-1.active > ul > li:nth-child(3)')
-    
+
         // switch to /dauerhaft-beste-preis-leistung
         await page.click(".selectize-input.items.not-full.has-options")
         await page.click('div[data-value="/de/angebote/ab-montag,-10.11.25/dauerhaft-beste-preis-leistung-t-341394/"]')
-        
+
         await page.waitForSelector("#dauerhaft-beste-preis-leistung-t-341394", { state: "attached", timeout: 30000 })
 
-         // Alle ArtikelTiles auslesen
+        // Alle ArtikelTiles auslesen
         const offers: Offer[] = await page.$$eval('.b463.produktBoxContainer', nodes =>
             nodes.map(n => {
                 const title = n.querySelector(".produktBox-txt-headline")?.textContent?.trim() || '';
                 const amount = n.querySelector(".produktBox-txt-inh")?.textContent?.trim() || '';
-                const price =  Number(n.querySelector(".produktBox-cont-wrapper-price")?.textContent?.trim().replace(",",".").replace("*",""))
+                const price = Number(n.querySelector(".produktBox-cont-wrapper-price")?.textContent?.trim().replace(",", ".").replace("*", ""))
                 const priceOld = n.querySelector(".produktBox-cont-wrapper-uvp")?.textContent?.trim() || '';
                 const priceBase = Number(n.querySelector(".produktBox-txt-price")?.textContent?.trim().split("=")[1].replace(")", "").replace(",", "."))
-                const percentSaving = n.querySelector(".produktBox-cont-wrapper-billiger")?.textContent?.trim() || ''; 
+                const percentSaving = n.querySelector(".produktBox-cont-wrapper-billiger")?.textContent?.trim() || '';
                 return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Norma" };
             })
         );
@@ -77,5 +77,4 @@ export async function getNormaOffers() {
     } finally {
         await browser.close();
     }
-
 }

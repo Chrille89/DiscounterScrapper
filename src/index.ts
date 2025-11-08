@@ -7,10 +7,7 @@ import { getNormaOffers } from "./normaOffers";
 
 (async () => {
     console.time("Load offers");
-    
-    let offers = await getNormaOffers()
-    console.log("Norma offers found: ", offers);
-    /*
+
     // ALDI
     let offers = await getAldiOffers()
 
@@ -22,7 +19,7 @@ import { getNormaOffers } from "./normaOffers";
     // NETTO
     offers?.push(...await getNettoOffers("https://netto.de/angebote/spar-stars/") ?? [])
     offers?.push(...await getNettoOffers("https://netto.de/angebote/regionale-produkte/") ?? [])
-    offers?.push(...await getNettoOffers("https://netto.de/angebote/hammer-donnerstag/") ?? [])        
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/hammer-donnerstag/") ?? [])
     offers?.push(...await getNettoOffers("https://netto.de/angebote/knaller-wochenende/") ?? [])
 
     // PENNY
@@ -31,12 +28,15 @@ import { getNormaOffers } from "./normaOffers";
     // Rewe
     offers?.push(...await getReweOffers() ?? [])
 
+    // Norma
+    offers?.push(...await getNormaOffers() ?? [])
+
     offers = offers?.sort((a, b) => a.priceBase - b.priceBase).slice(0, 5)
 
     let response = await fetch('http://h2857701.stratoserver.net:3001', {
         method: 'DELETE'
     });
-    console.log("DELETE-Response: ",await response.json())
+    console.log("DELETE-Response: ", await response.json())
 
     response = await fetch('http://h2857701.stratoserver.net:3001', {
         method: 'POST',
@@ -45,7 +45,7 @@ import { getNormaOffers } from "./normaOffers";
         },
         body: JSON.stringify(offers),
     })
-    console.log("POST-Response: ",await response.json())*/
+    console.log("POST-Response: ", await response.json())
     console.timeEnd("Load offers");
 
 })()
