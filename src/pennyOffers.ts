@@ -38,7 +38,7 @@ export async function getPennyOffers() {
                 return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Penny" };
             })
         );
-        return filterOffersByKeywords(offers, meatKeywords, blacklist);
+        return offers
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {

@@ -1,15 +1,5 @@
 export const meatKeywords = [
-    "schwein",
-    "huhn",
-    "rind",
-    "hähnchen",
-    "brust",
-    "filet",
-    "schnitzel",
-    "ente",
-    "gans",
-    "gänse",
-    "puten",
+    // Schwein & Rind
     "schulter",
     "haxe",
     "eisbein",
@@ -19,9 +9,48 @@ export const meatKeywords = [
     "kotelett",
     "kasseler",
     "rücken",
+    "braten",
+    "hack",
+    "schwein",
+    "rind",
+    "filet",
+    "schnitzel",
+    "gulasch",
+    "roulade",
+    "schinken",
+
+    // Geflügel
+    "ente",
+    "gans",
+    "gänse",
+    "puten",
+    "hähnchen",
+    "brust",
+    "huhn",
+
+    // 🦌 Wild
+    "Rehfleisch",
+    "Hirschfleisch",
+    "Wildschweinfleisch",
+    "Hasenfleisch",
+
+    // 🐟 Fisch (Süß- & Salzwasser)
     "fisch",
-    "hack"
+    "Lachs",
+    "Forelle",
+    "Kabeljau",
+    "Seelachs",
+    "Thunfisch",
+    "Heilbutt",
+    "Zander",
+    "Rotbarsch",
+    "Makrele",
+    "Sardine",
+    "Hering",
+    "Dorade",
+    "Barsch",
+    "Garnelen"
 ];
 
-export const blacklist = ["enteiser"]; 
+export const blacklist = ["enteiser", "käse-schinken-croissant"];
 

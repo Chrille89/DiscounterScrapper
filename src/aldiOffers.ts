@@ -30,7 +30,7 @@ export async function getAldiOffers() {
                 return { title, amount,price,priceOld, percentSaving, priceBase, discounter : "Aldi" };
             })
         );
-        return filterOffersByKeywords(offers, meatKeywords, blacklist);
+        return offers
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {

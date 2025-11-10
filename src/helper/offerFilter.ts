@@ -4,7 +4,7 @@ export function filterOffersByKeywords(offers: Offer[], keywords: string[], blac
     return offers.filter(
         (offer, index, self) =>
             (index === self.findIndex((o) => o.title === offer.title)) &&
-            (keywords.some(word => offer.title.toLowerCase().includes(word))) &&
-            (!blacklist.some(bad => offer.title.toLowerCase().includes(bad)))
+            (keywords.some(word => offer.title.toLowerCase().includes(word.toLowerCase()))) &&
+            (!blacklist.some(bad => offer.title.toLowerCase().includes(bad.toLowerCase())))
     );
 }

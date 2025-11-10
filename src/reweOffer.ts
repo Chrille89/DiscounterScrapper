@@ -17,7 +17,7 @@ export async function getReweOffers() {
 
         await page.goto("https://www.rewe.de/angebote/potsdam-golm/4040421/rewe-markt-in-der-feldmark-3a/?icid=marktseiten_rewe-de%3Amarktseite-4040421_int_angebote_rewe-de%3Aangebote_nn_nn_nn_nn#frische-und-convenience-current-week", { waitUntil: "domcontentloaded" });
 
-        await page.waitForSelector(selector,{ state: "attached", timeout: 30000 })
+        await page.waitForSelector(selector, { state: "attached", timeout: 30000 })
 
         await autoScroll(page)
 
@@ -36,12 +36,11 @@ export async function getReweOffers() {
                 return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Rewe" };
             })
         );
-        return filterOffersByKeywords(offers, meatKeywords, blacklist);
+        return offers
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {
         await browser.close();
     }
-
 }
 
