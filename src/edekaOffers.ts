@@ -14,7 +14,7 @@ export async function getEdekaOffers() {
     try {
         const selector = `[data-testid="eui-Box-container"]`
 
-        await page.goto("https://www.edeka.de/eh/minden-hannover/edeka-center-stern-center-stern-center-1-10/angebote.jsp", { waitUntil: "domcontentloaded" });
+        await page.goto("https://www.edeka.de/eh/minden-hannover/edeka-klausner-brandenburger-str.-30-31/angebote-10003328-resp.jsp", { waitUntil: "domcontentloaded" });
 
         await page.waitForSelector(selector, { state: "attached", timeout: 30000 })
 

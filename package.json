@@ -10,6 +10,7 @@
     "start": "ts-node src/index.ts",
     "aldi": "ts-node src/aldiOffers.ts",
     "netto": "ts-node src/nettoOffers.ts",
+    "kaufland": "ts-node src/kauflandOffers.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
