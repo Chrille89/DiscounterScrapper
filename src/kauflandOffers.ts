@@ -42,14 +42,15 @@ export async function getKauflandOffers() {
 
         await page.waitForSelector(selector)
 
+      //  await autoScroll(page)
+
         // Alle ArtikelTiles auslesen 
         const offers: Offer[] = await page.$$eval(".k-grid__item", nodes =>
             nodes.map(n => {
-                const subtitle = n.querySelector("div.k-product-tile__subtitle")?.textContent?.trim() || '' ;
-                const title =  n.querySelector("div.k-product-tile__title")?.textContent?.trim() || '' + ' ' + subtitle;
+                const title =  n.querySelector("div.k-product-tile__subtitle")?.textContent?.trim() || '';
                 const amount = n.querySelector("div.k-product-tile__unit-price")?.textContent?.trim() || '' ;
-                const price = Number(n.querySelector("div.k-price-tag__price")?.textContent?.trim() || '' );
-                const priceOld = n.querySelector("div.k-price-tag__old-price-line-through")?.textContent?.trim() || '' ;
+                const price = Number(n.querySelector("div.k-price-tag__price")?.textContent?.trim().replace("*","") || '' );
+                const priceOld = n.querySelector("k-price-tag__old-price")?.textContent?.trim() || '' ;
                 const priceBaseStr =  n.querySelector("div.k-product-tile__base-price")?.textContent?.trim()
                 const priceBase = priceBaseStr?.includes("=") ? Number(n.querySelector("div.k-product-tile__base-price")?.textContent?.split("=")[1].trim().replace(")","")) : 0
                 const percentSaving =  n.querySelector("div.k-price-tag__discount")?.textContent?.trim() || '' ; 
@@ -60,11 +61,12 @@ export async function getKauflandOffers() {
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {
-       // await browser.close();
+        await browser.close();
     }
 }
 
 (async () => {
-    const offers = await getKauflandOffers()
+    const offers = await filterOffersByKeywords(await getKauflandOffers() ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase)
     console.log("Offers: ", offers)
 })()
