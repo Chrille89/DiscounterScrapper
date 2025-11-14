@@ -1,6 +1,7 @@
 import { chromium } from "playwright-extra";
 import { Offer } from './types/offer.type';
-import { meatKeywords } from "./helper/meatKeywords";
+import { blacklist, meatKeywords } from "./helper/meatKeywords";
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 export async function getNettoOffers(url: string): Promise<Offer[] | undefined> {
     const browser = await chromium.launch({ headless: true });
@@ -43,3 +44,14 @@ export async function getNettoOffers(url: string): Promise<Offer[] | undefined> 
         await browser.close();
     }
 }
+
+/*
+(async () => {
+    let offers = await getNettoOffers("https://netto.de/angebote/spar-stars/")
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/regionale-produkte/") ?? [])
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/hammer-donnerstag/") ?? [])
+    offers?.push(...await getNettoOffers("https://netto.de/angebote/knaller-wochenende/") ?? [])
+    console.log("Netto offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase))
+})()
+*/

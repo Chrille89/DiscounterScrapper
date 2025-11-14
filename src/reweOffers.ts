@@ -44,3 +44,10 @@ export async function getReweOffers() {
     }
 }
 
+/*
+(async () => {
+    let offers = await getReweOffers()
+    console.log("Rewe offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase))
+})()
+*/

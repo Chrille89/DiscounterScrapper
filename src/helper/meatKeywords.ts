@@ -17,7 +17,6 @@ export const meatKeywords = [
     "schnitzel",
     "gulasch",
     "roulade",
-    "schinken",
 
     // Geflügel
     "ente",
@@ -52,5 +51,5 @@ export const meatKeywords = [
     "Garnelen"
 ];
 
-export const blacklist = ["enteiser", "käse-schinken-croissant"];
+export const blacklist = ["enteiser"];
 

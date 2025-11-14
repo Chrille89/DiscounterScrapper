@@ -12,13 +12,13 @@ export async function getEdekaOffers() {
     const page = await context.newPage();
 
     try {
-        const selector = `[data-testid="eui-Box-container"]`
+        const selector = ".css-10didr4"
 
         await page.goto("https://www.edeka.de/eh/minden-hannover/edeka-klausner-brandenburger-str.-30-31/angebote-10003328-resp.jsp", { waitUntil: "domcontentloaded" });
 
         await page.waitForSelector(selector, { state: "attached", timeout: 30000 })
 
-        const offers: Offer[] = await page.$$eval('.css-1uiiw0z', nodes =>
+        const offers: Offer[] = await page.$$eval(".css-1uiiw0z", nodes =>
             nodes.map(n => {
                 const title = n.querySelector(".css-i72elb")?.textContent?.trim() || '';
                 let splittedTextArray = n.querySelector(".css-1skykc0")?.textContent?.split(" ")
@@ -39,7 +39,7 @@ export async function getEdekaOffers() {
                     }
                 }
                 const priceBase = calculatedPriceBase.toFixed(2) as unknown as number
-                return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Edeka Stern-Center" };
+                return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Edeka Branbenburger Str." };
             })
         );
         return offers
@@ -49,4 +49,12 @@ export async function getEdekaOffers() {
         await browser.close();
     }
 }
+
+/*
+(async () => {
+    let offers = await getEdekaOffers()
+    console.log("Edeka offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase))
+})()
+*/
 

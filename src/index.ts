@@ -2,11 +2,12 @@ import { getAldiOffers } from "./aldiOffers"
 import { getNettoDiscountOffers } from "./nettoDiscountOffers"
 import { getNettoOffers } from "./nettoOffers"
 import { getPennyOffers } from "./pennyOffers";
-import { getReweOffers } from "./reweOffer";
+import { getReweOffers } from "./reweOffers";
 import { getNormaOffers } from "./normaOffers";
 import { getEdekaOffers } from "./edekaOffers";
 import { blacklist, meatKeywords } from './helper/meatKeywords';
 import { filterOffersByKeywords } from "./helper/offerFilter";
+import { getKauflandOffers } from "./kauflandOffers";
 
 (async () => {
     console.time("Load offers");
@@ -40,9 +41,17 @@ import { filterOffersByKeywords } from "./helper/offerFilter";
     console.log("Loading Norma offers...")
     offers?.push(...await getNormaOffers() ?? [])
 
-    // Edeka Stern-Center
+    // Edeka Brandenburger Str. 
     console.log("Loading Edeka offers...")
     offers?.push(...await getEdekaOffers() ?? [])
+
+    // Kaufland Zeppelinstraße
+    console.log("Loading Kaufland offers...");
+    offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=0001_TopArticle") ?? [])
+    offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=135_Foodknueller") ?? [])
+    offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=02_Obst__Gemuese__Pflanzen") ?? [])
+    offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01_Fleisch__Gefluegel__Wurst") ?? [])
+    offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01a_Frischer_Fisch") ?? [])
     
     offers = filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
         .sort((a, b) => a.priceBase - b.priceBase)

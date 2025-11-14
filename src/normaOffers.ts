@@ -78,3 +78,11 @@ export async function getNormaOffers() {
         await browser.close();
     }
 }
+
+/*
+(async () => {
+    let offers = await getNormaOffers()
+    console.log("Norma offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase))
+})()
+*/

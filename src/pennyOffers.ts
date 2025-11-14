@@ -46,3 +46,11 @@ export async function getPennyOffers() {
     }
 
 }
+
+/*
+(async () => {
+    let offers = await getPennyOffers()
+    console.log("Penny offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase))
+})()
+*/

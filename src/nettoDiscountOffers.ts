@@ -77,3 +77,11 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
         throw err
     }
 }
+
+/*
+(async () => {
+    let offers = await getNettoDiscountOffers()
+    console.log("Netto Marken-Discount offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase))
+})()
+*/

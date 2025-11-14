@@ -37,3 +37,11 @@ export async function getAldiOffers() {
         await browser.close();
     }
 }
+
+/*
+(async () => {
+    let offers = await getAldiOffers()
+    console.log("Aldi offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase))
+})()
+*/

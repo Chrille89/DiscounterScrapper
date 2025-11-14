@@ -9,8 +9,13 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "aldi": "ts-node src/aldiOffers.ts",
-    "netto": "ts-node src/nettoOffers.ts",
+    "edeka": "ts-node src/edekaOffers.ts",
     "kaufland": "ts-node src/kauflandOffers.ts",
+    "nettodiscounter": "ts-node src/nettoDiscountOffers.ts",
+    "netto": "ts-node src/nettoOffers.ts",
+    "norma": "ts-node src/normaOffers.ts",
+    "penny": "ts-node src/pennyOffers.ts",
+    "rewe": "ts-node src/reweOffers.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
