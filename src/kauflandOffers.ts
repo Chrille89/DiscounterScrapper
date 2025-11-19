@@ -1,7 +1,6 @@
 import { chromium } from "playwright-extra";
 import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./helper/meatKeywords";
-import { filterOffersByKeywords } from "./helper/offerFilter";
+import { blacklist, meatKeywords } from "./data/meatKeywords";
 
 export async function getKauflandOffers(url: string) {
     const browser = await chromium.launch({ headless: true });
@@ -53,7 +52,7 @@ export async function getKauflandOffers(url: string) {
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {
-       await browser.close();
+   //    await browser.close();
     }
 }
 
@@ -66,5 +65,4 @@ export async function getKauflandOffers(url: string) {
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01a_Frischer_Fisch") ?? [])
     console.log("Kaufland offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
         .sort((a, b) => a.priceBase - b.priceBase))
-})()
-*/
+})()*/

@@ -5,7 +5,7 @@ import { getPennyOffers } from "./pennyOffers";
 import { getReweOffers } from "./reweOffers";
 import { getNormaOffers } from "./normaOffers";
 import { getEdekaOffers } from "./edekaOffers";
-import { blacklist, meatKeywords } from './helper/meatKeywords';
+import { blacklist, meatKeywords, vegetablesKeywords } from './data/meatKeywords';
 import { filterOffersByKeywords } from "./helper/offerFilter";
 import { getKauflandOffers } from "./kauflandOffers";
 
@@ -18,16 +18,13 @@ import { getKauflandOffers } from "./kauflandOffers";
 
     // NETTO Marken Discount
     console.log("Loading Netto Marken-Discount offers...")
-    let nettoOffers = await getNettoDiscountOffers()
-    if (nettoOffers)
-        offers?.push(...nettoOffers)
+    offers?.push(...await getNettoDiscountOffers() ?? [])
 
     // NETTO
     console.log("Loading Netto offers...")
     offers?.push(...await getNettoOffers("https://netto.de/angebote/spar-stars/") ?? [])
     offers?.push(...await getNettoOffers("https://netto.de/angebote/regionale-produkte/") ?? [])
     offers?.push(...await getNettoOffers("https://netto.de/angebote/hammer-donnerstag/") ?? [])
-    offers?.push(...await getNettoOffers("https://netto.de/angebote/knaller-wochenende/") ?? [])
 
     // PENNY
     console.log("Loading Penny offers...")
@@ -38,8 +35,8 @@ import { getKauflandOffers } from "./kauflandOffers";
     offers?.push(...await getReweOffers() ?? [])
 
     // Norma
-    console.log("Loading Norma offers...")
-    offers?.push(...await getNormaOffers() ?? [])
+   // console.log("Loading Norma offers...")
+   // offers?.push(...await getNormaOffers() ?? [])
 
     // Edeka Brandenburger Str. 
     console.log("Loading Edeka offers...")
@@ -53,9 +50,11 @@ import { getKauflandOffers } from "./kauflandOffers";
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01_Fleisch__Gefluegel__Wurst") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01a_Frischer_Fisch") ?? [])
     
-    offers = filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase)
-        .slice(0,5)
+    const meatOffers = filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5)
+
+    console.log("Top 5 Meat Offers: ", meatOffers)
+   // console.log("Top 5 Vegetables Offers: ", vegetablesOffers)
 
     let response = await fetch('http://h2857701.stratoserver.net:3001', {
         method: 'DELETE'
@@ -67,7 +66,7 @@ import { getKauflandOffers } from "./kauflandOffers";
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(offers),
+        body: JSON.stringify(meatOffers),
     })
     console.log("POST-Response: ", await response.json())
 

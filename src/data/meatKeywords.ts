@@ -1,0 +1,108 @@
+export const meatKeywords = [
+    // Schwein & Rind
+    "schulter",
+    "haxe",
+    "eisbein",
+    "bauch",
+    "hüft",
+    "nacken",
+    "kotelett",
+    "kasseler",
+    "rücken",
+    "braten",
+    "hack",
+    "schwein",
+    "rind",
+    "filet",
+    "schnitzel",
+    "gulasch",
+    "chicken",
+    "roulade",
+    "steak",
+    "geschnetzeltes",
+
+    // Geflügel
+    "ente",
+    "gans",
+    "gänse",
+    "pute",
+    "hähnchen",
+    "brust",
+    "huhn",
+
+    // 🦌 Wild
+    "Rehfleisch",
+    "Hirschfleisch",
+    "Wildschweinfleisch",
+    "Hasenfleisch",
+
+    // 🐟 Fisch (Süß- & Salzwasser)
+    "fisch",
+    "Lachs",
+    "Forelle",
+    "Kabeljau",
+    "Seelachs",
+    "Thunfisch",
+    "Heilbutt",
+    "Zander",
+    "Rotbarsch",
+    "Makrele",
+    "Sardine",
+    "Hering",
+    "Dorade",
+    "Barsch",
+    "Garnelen"
+];
+
+export const vegetablesKeywords = [
+    "karotten",
+    "kartoffeln",
+    "zwiebeln",
+    "knoblauch",
+    "tomaten",
+    "gurken",
+    "paprika",
+    "zucchini",
+    "auberginen",
+    "brokkoli",
+    "blumenkohl",
+    "rosenkohl",
+    "spinat",
+    "kohlrabi",
+    "sellerie",
+    "lauch",
+    "porree",
+    "rote bete",
+    "mais",
+    "erbsen",
+    "bohnen",
+    "wirsing",
+    "weißkohl",
+    "rotkohl",
+    "chinakohl",
+    "feldsalat",
+    "rucola",
+    "eisbergsalat",
+    "kopfsalat",
+    "pilze",
+    "spargel grün",
+    "spargel weiß",
+    "kürbis",
+    "fenchel",
+    "radieschen",
+    "chili",
+    "ingwer"
+];
+
+export const blacklist = [
+    "enteiser",
+    "studentenfutter",
+    "abenteuer",
+    "plätzchenteig",
+    "experimente",
+    "heringsfiletröllchen",
+    "thunfischfilets",
+    "thunfisch-filets"
+];
+
+

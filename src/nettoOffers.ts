@@ -1,7 +1,6 @@
 import { chromium } from "playwright-extra";
 import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./helper/meatKeywords";
-import { filterOffersByKeywords } from "./helper/offerFilter";
+import { blacklist, meatKeywords } from "./data/meatKeywords";
 
 export async function getNettoOffers(url: string): Promise<Offer[] | undefined> {
     const browser = await chromium.launch({ headless: true });

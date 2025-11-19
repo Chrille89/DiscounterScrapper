@@ -1,8 +1,7 @@
 import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./helper/meatKeywords";
-import { filterOffersByKeywords } from "./helper/offerFilter";
+import { blacklist, meatKeywords } from "./data/meatKeywords";
 
 chromium.use(StealthPlugin());
 

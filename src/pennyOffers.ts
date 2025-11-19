@@ -1,9 +1,8 @@
 
 import { chromium } from "playwright-extra";
 import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./helper/meatKeywords";
+import { blacklist, meatKeywords } from "./data/meatKeywords";
 import { autoScroll } from "./helper/autoScroll";
-import { filterOffersByKeywords } from "./helper/offerFilter";
 
 export async function getPennyOffers() {
     const browser = await chromium.launch({ headless: true });

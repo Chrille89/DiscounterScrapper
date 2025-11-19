@@ -2,8 +2,7 @@ import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { Offer } from './types/offer.type';
 import { autoScroll } from "./helper/autoScroll";
-import { blacklist, meatKeywords } from "./helper/meatKeywords";
-import { filterOffersByKeywords } from "./helper/offerFilter";
+import { blacklist, meatKeywords } from "./data/meatKeywords";
 
 chromium.use(StealthPlugin());
 
@@ -31,7 +30,7 @@ export async function getReweOffers() {
                 const priceOld = ""
                 const informationArrayPriceBase = informationArray.filter((item) => item.textContent.includes("="))
                 const priceBase = Number(informationArrayPriceBase.length == 1 ?
-                    informationArrayPriceBase[0].textContent?.split("=")[1].trim().replace(")", "").replace(",", ".") : price);
+                    informationArrayPriceBase[0].textContent?.split("=")[1].trim().replace(")", "").replace(",", ".") : title.includes("100 g") ? price*100 : price);
                 const percentSaving = ""
                 return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Rewe" };
             })

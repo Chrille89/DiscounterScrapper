@@ -2,13 +2,13 @@
 import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./helper/meatKeywords";
-import { filterOffersByKeywords } from "./helper/offerFilter";
+import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { filterOffersByKeywords } from './helper/offerFilter'
 
 chromium.use(StealthPlugin());
 
 export async function getNormaOffers() {
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ headless: false });
     const context = await browser.newContext();
 
     // Cookie für eine bestimmte Netto-Filiale (z. B. 2043 = Beispiel-ID)
@@ -55,9 +55,9 @@ export async function getNormaOffers() {
 
         // switch to /dauerhaft-beste-preis-leistung
         await page.click(".selectize-input.items.not-full.has-options")
-        await page.click('div[data-value="/de/angebote/ab-montag,-10.11.25/dauerhaft-beste-preis-leistung-t-341394/"]')
+        await page.click('#js-getheight > li.l-42.lvl-1.active > ul > li.lvl-2.active > a')
 
-        await page.waitForSelector("#dauerhaft-beste-preis-leistung-t-341394", { state: "attached", timeout: 30000 })
+     //   await page.waitForSelector("#dauerhaft-beste-preis-leistung-t-341394", { state: "attached", timeout: 30000 })
 
         // Alle ArtikelTiles auslesen
         const offers: Offer[] = await page.$$eval('.b463.produktBoxContainer', nodes =>
@@ -75,7 +75,7 @@ export async function getNormaOffers() {
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {
-        await browser.close();
+       // await browser.close();
     }
 }
 

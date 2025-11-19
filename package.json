@@ -9,6 +9,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "aldi": "ts-node src/aldiOffers.ts",
+    "lidl": "ts-node src/lidlOffers.ts",
     "edeka": "ts-node src/edekaOffers.ts",
     "kaufland": "ts-node src/kauflandOffers.ts",
     "nettodiscounter": "ts-node src/nettoDiscountOffers.ts",
@@ -20,13 +21,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.9.2",
     "playwright": "^1.56.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "fs-extra": "^11.3.2",
+    "node-tesseract-ocr": "^2.2.1",
+    "pdf-parse": "^2.4.5",
     "playwright-extra": "^4.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "sharp": "^0.34.5"
   }
 }
