@@ -8,7 +8,7 @@ import { filterOffersByKeywords } from './helper/offerFilter'
 chromium.use(StealthPlugin());
 
 export async function getNormaOffers() {
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
 
     // Cookie für eine bestimmte Netto-Filiale (z. B. 2043 = Beispiel-ID)
@@ -54,10 +54,10 @@ export async function getNormaOffers() {
         await page.click('#js-getheight > li.l-42.lvl-1.active > ul > li:nth-child(3)')
 
         // switch to /dauerhaft-beste-preis-leistung
-        await page.click(".selectize-input.items.not-full.has-options")
+       // await page.click(".selectize-input.items.not-full.has-options")
         await page.click('#js-getheight > li.l-42.lvl-1.active > ul > li.lvl-2.active > a')
 
-     //   await page.waitForSelector("#dauerhaft-beste-preis-leistung-t-341394", { state: "attached", timeout: 30000 })
+        await page.waitForSelector(".b463.produktBoxContainer", { state: "attached", timeout: 30000 })
 
         // Alle ArtikelTiles auslesen
         const offers: Offer[] = await page.$$eval('.b463.produktBoxContainer', nodes =>
@@ -66,7 +66,8 @@ export async function getNormaOffers() {
                 const amount = n.querySelector(".produktBox-txt-inh")?.textContent?.trim() || '';
                 const price = Number(n.querySelector(".produktBox-cont-wrapper-price")?.textContent?.trim().replace(",", ".").replace("*", ""))
                 const priceOld = n.querySelector(".produktBox-cont-wrapper-uvp")?.textContent?.trim() || '';
-                const priceBase = Number(n.querySelector(".produktBox-txt-price")?.textContent?.trim().split("=")[1].replace(")", "").replace(",", "."))
+                let splittedPriceOld = n.querySelector(".produktBox-txt-price")?.textContent?.trim().split("/")[0].split("=")[1]
+                const priceBase = splittedPriceOld ? Number(splittedPriceOld.replace(/[A-Za-zÄÖÜäöüß()\s]/g, "").replace(",",".")): 0
                 const percentSaving = n.querySelector(".produktBox-cont-wrapper-billiger")?.textContent?.trim() || '';
                 return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Norma" };
             })
@@ -75,7 +76,7 @@ export async function getNormaOffers() {
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {
-       // await browser.close();
+        await browser.close();
     }
 }
 

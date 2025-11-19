@@ -102,7 +102,8 @@ export const blacklist = [
     "experimente",
     "heringsfiletröllchen",
     "thunfischfilets",
-    "thunfisch-filets"
+    "thunfisch-filets",
+    "gesundheitsbad"
 ];
 
 
