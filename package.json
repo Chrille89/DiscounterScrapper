@@ -31,6 +31,7 @@
     "fs-extra": "^11.3.2",
     "node-tesseract-ocr": "^2.2.1",
     "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^5.4.394",
     "playwright-extra": "^4.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "sharp": "^0.34.5"
