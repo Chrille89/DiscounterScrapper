@@ -1,3 +1,4 @@
+import { chromium } from 'playwright';
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs"
 import { Offer } from "./types/offer.type";
 import { filterOffersByKeywords } from "./helper/offerFilter";
@@ -160,8 +161,53 @@ export async function extractOffersFromUrl(pdfUrl: string): Promise<Offer[]> {
             });
         }
     }
-
     return offers;
+}
+
+async function getActualPdfUrl() {
+    const browser = await chromium.launch({ headless: true });
+    const page = await browser.newPage();
+
+    try {
+        await page.goto('https://www.lidl.de/c/online-prospekte/s10005610', { waitUntil: 'domcontentloaded' });
+
+        // accept user data handling
+        await page.click("#onetrust-accept-btn-handler")
+
+        // close overlay 'Filiale wählen' 
+        await page.click(".overlay__close-button")
+
+        await page.click("[data-track-name='Aktionsprospekt']")
+
+        let apiUrl = "";
+        page.on("requestfinished", req => {
+            if (req.url().includes("/v4/flyer")) {
+                apiUrl = req.url();
+            }
+        });
+
+        // kurz warten, damit alle Netzwerkaufrufe durch sind
+        await page.waitForTimeout(1500);
+
+        // 3. Wenn gefunden → direkt aufrufen
+        if (apiUrl) {
+            apiUrl += "&region_id=22&region_code=22"
+            console.log("API gefunden:", apiUrl);
+
+            const response = await page.request.get(apiUrl);
+            const data = await response.json();
+            const pdfUrl: string = data.flyer.pdfUrl
+            console.log("PDF-URL:", pdfUrl);
+            return pdfUrl;
+        } else {
+            console.log("Kein API-Endpunkt gefunden!");
+        }
+
+    } catch (error) {
+        console.error('Fehler beim Abrufen des PDF-Prospekts:', error);
+    } finally {
+        await browser.close();
+    }
 }
 
 /* -----------------------------------------------------
@@ -169,9 +215,9 @@ export async function extractOffersFromUrl(pdfUrl: string): Promise<Offer[]> {
 ------------------------------------------------------ */
 
 (async () => {
-    const url =
-        "https://object.storage.eu01.onstackit.cloud/leaflets/pdfs/019a8453-11b9-7396-837e-491dc8afb6d7/Aktionsprospekt-17-11-2025-22-11-2025-02.pdf";
-
-    const data = await extractOffersFromUrl(url);
-    console.log(JSON.stringify(filterOffersByKeywords(data,meatKeywords,blacklist), null, 2));
+    const url = await getActualPdfUrl()
+    if (url) {
+        const data = await extractOffersFromUrl(url);
+        console.log(JSON.stringify(filterOffersByKeywords(data, meatKeywords, blacklist), null, 2));
+    }
 })();
