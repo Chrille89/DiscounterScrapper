@@ -34,10 +34,10 @@ export const meatKeywords = [
     "huhn",
 
     // 🦌 Wild
-    "rehfleisch",
-    "hirschfleisch",
-    "wildschweinfleisch",
-    "hasenfleisch",
+    "reh",
+    "hirsch",
+    "wildschwein",
+    "hase",
 
     // 🐟 Fisch (Süß- & Salzwasser)
     "fisch",
