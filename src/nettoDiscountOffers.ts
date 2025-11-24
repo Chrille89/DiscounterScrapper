@@ -1,7 +1,7 @@
 import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { Page } from "playwright";
-import { Offer } from './types/offer.type';
+import { OfferInfo } from './types/offer.type';
 
 chromium.use(StealthPlugin());
 
@@ -50,16 +50,16 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
         await page.waitForSelector(selector, { state: "attached", timeout: 6000 })
 
         // Alle ArtikelTiles auslesen
-        const offers: Offer[] = await page.$eval(selector,
+        const offers: OfferInfo[] = await page.$eval(selector,
             (ul) => {
                 // ul ist hier das erste Element, das dem Selector entspricht
                 return Array.from(ul.querySelectorAll("div")).map((div) => {
-                    let offer: Offer = {
+                    let offer: OfferInfo = {
                         title: div.querySelector(".product__title")?.textContent?.trim() ?? "",
                         amount: div.querySelector(".product-property.product-property__bundle-text")?.textContent?.trim() ?? "",
                         price: Number(div.querySelector(".product__current-price.tc-product-price")?.textContent?.trim().replace(/[^\d,.,-]/g, "").replace("-", "")),
                         priceOld: div.querySelector(".product__old-price")?.textContent?.trim() ?? "",
-                        percentSaving: div.querySelector(".product__percent-saving__text")?.textContent?.trim(),
+                        percentSaving: div.querySelector(".product__percent-saving__text")?.textContent?.trim() ?? "",
                         priceBase: Number(div.querySelector(".product-property.product-property__base-price")?.textContent?.trim().split("/")[0]),
                         discounter: "Netto Marken-Discount"
                     }

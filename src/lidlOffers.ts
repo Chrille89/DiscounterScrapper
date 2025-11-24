@@ -1,8 +1,8 @@
 import { chromium } from 'playwright';
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs"
-import { Offer } from "./types/offer.type";
+import { OfferInfo } from "./types/offer.type";
 import { filterOffersByKeywords } from "./helper/offerFilter";
-import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { blacklist, meatKeywords } from "./data/keywords";
 
 type TextItem = {
     text: string;
@@ -13,7 +13,7 @@ type TextItem = {
 /**
  * Hauptfunktion: PDF per URL laden & vollständig analysieren
  */
-export async function extractOffersFromUrl(pdfUrl: string): Promise<Offer[]> {
+export async function extractOffersFromUrl(pdfUrl: string): Promise<OfferInfo[]> {
     // -----------------------------------------------------
     // 1) PDF laden
     // -----------------------------------------------------
@@ -23,7 +23,7 @@ export async function extractOffersFromUrl(pdfUrl: string): Promise<Offer[]> {
     const uint8 = new Uint8Array(await response.arrayBuffer());
     const pdf = await pdfjsLib.getDocument({ data: uint8 }).promise;
 
-    const offers: Offer[] = [];
+    const offers: OfferInfo[] = [];
 
     // -----------------------------------------------------
     // 2) Jede Seite einzeln analysieren
@@ -98,11 +98,11 @@ export async function extractOffersFromUrl(pdfUrl: string): Promise<Offer[]> {
 
             // --- alter Preis ---
             const oldMatch = blockText.match(/statt\s*(\d{1,3}[.,]\d{2})/i);
-            const priceOld = oldMatch ? oldMatch[1] : undefined;
+            const priceOld = oldMatch ? oldMatch[1] : "";
 
             // --- Prozent ---
             const percentMatch = blockText.match(/(\d{1,2}\s?%)/);
-            const percentSaving = percentMatch ? percentMatch[1] : undefined;
+            const percentSaving = percentMatch ? percentMatch[1] : "";
 
             // --- Menge ---
             const amountMatch = blockText.match(/\b\d+(\.\d+)?\s*(g|kg|ml|l)\b/i);
@@ -210,14 +210,25 @@ async function getActualPdfUrl() {
     }
 }
 
+export async function getLidlOffers() {
+    try {
+        const url = await getActualPdfUrl()
+        if (url) {
+            const data = await extractOffersFromUrl(url);
+            // console.log(JSON.stringify(filterOffersByKeywords(data, meatKeywords, blacklist), null, 2));
+            return data;
+        }
+        throw new Error("Could not extract pdf url.")
+    } catch (error) {
+        console.error("Could not extract Lidl offer. Reason: ", error)
+    }
+}
+
 /* -----------------------------------------------------
    Beispielaufruf
 ------------------------------------------------------ */
-
+/*
 (async () => {
-    const url = await getActualPdfUrl()
-    if (url) {
-        const data = await extractOffersFromUrl(url);
-        console.log(JSON.stringify(filterOffersByKeywords(data, meatKeywords, blacklist), null, 2));
-    }
+   await getLidlOffers()
 })();
+*/

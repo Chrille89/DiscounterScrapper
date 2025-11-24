@@ -1,8 +1,8 @@
 import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { Offer } from './types/offer.type';
+import { OfferInfo } from './types/offer.type';
 import { autoScroll } from "./helper/autoScroll";
-import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { blacklist, meatKeywords } from "./data/keywords";
 
 chromium.use(StealthPlugin());
 
@@ -21,7 +21,7 @@ export async function getReweOffers() {
         await autoScroll(page)
 
         // Alle ArtikelTiles auslesen 
-        const offers: Offer[] = await page.$$eval('[data-category="frische-und-convenience"]', nodes =>
+        const offers: OfferInfo[] = await page.$$eval('[data-category="frische-und-convenience"]', nodes =>
             nodes.map(n => {
                 const informationArray = Array.from(n.querySelectorAll(".cor-offer-information__additional"))
                 const title = informationArray.map(el => el.textContent?.trim()).join("") + " " + n.querySelector(".cor-offer-information__title")?.textContent?.trim() || '';

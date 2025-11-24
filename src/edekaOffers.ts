@@ -1,7 +1,7 @@
 import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { OfferInfo } from './types/offer.type';
+import { blacklist, meatKeywords } from "./data/keywords";
 
 chromium.use(StealthPlugin());
 
@@ -17,7 +17,7 @@ export async function getEdekaOffers() {
 
         await page.waitForSelector(selector, { state: "attached", timeout: 30000 })
 
-        const offers: Offer[] = await page.$$eval(".css-1uiiw0z", nodes =>
+        const offers: OfferInfo[] = await page.$$eval(".css-1uiiw0z", nodes =>
             nodes.map(n => {
                 const title = n.querySelector(".css-i72elb")?.textContent?.trim() || '';
                 let splittedTextArray = n.querySelector(".css-1skykc0")?.textContent?.split(" ")

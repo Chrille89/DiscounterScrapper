@@ -1,8 +1,8 @@
 
 import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { OfferInfo } from './types/offer.type';
+import { blacklist, meatKeywords } from "./data/keywords";
 import { filterOffersByKeywords } from './helper/offerFilter'
 
 chromium.use(StealthPlugin());
@@ -60,7 +60,7 @@ export async function getNormaOffers() {
         await page.waitForSelector(".b463.produktBoxContainer", { state: "attached", timeout: 30000 })
 
         // Alle ArtikelTiles auslesen
-        const offers: Offer[] = await page.$$eval('.b463.produktBoxContainer', nodes =>
+        const offers: OfferInfo[] = await page.$$eval('.b463.produktBoxContainer', nodes =>
             nodes.map(n => {
                 const title = n.querySelector(".produktBox-txt-headline")?.textContent?.trim() || '';
                 const amount = n.querySelector(".produktBox-txt-inh")?.textContent?.trim() || '';

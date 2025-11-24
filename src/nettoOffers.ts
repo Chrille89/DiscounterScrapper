@@ -1,8 +1,8 @@
 import { chromium } from "playwright-extra";
-import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { OfferInfo } from './types/offer.type';
+import { blacklist, meatKeywords } from "./data/keywords";
 
-export async function getNettoOffers(url: string): Promise<Offer[] | undefined> {
+export async function getNettoOffers(url: string): Promise<OfferInfo[] | undefined> {
     const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -16,7 +16,7 @@ export async function getNettoOffers(url: string): Promise<Offer[] | undefined> 
 
             try {
                 await page.waitForSelector(selector, { state: "attached", timeout: 5000 })
-                const offer: Offer = await page.$eval(selector, (n) => {
+                const offer: OfferInfo = await page.$eval(selector, (n) => {
                     const title = n.querySelector("h4")?.textContent?.trim().replace("\n", " ") || '';
                     const price = Number(n.querySelector('h3')?.textContent?.trim() || '');
                     let amount = n.querySelector('p')?.textContent?.trim().replace("\n", " ") || '';
@@ -27,7 +27,7 @@ export async function getNettoOffers(url: string): Promise<Offer[] | undefined> 
                         priceBase = Number(amount.split("=")[1])
                         amount = amount.split("1")[0].trim()
                     }
-                    return { title, amount, price, priceOld: undefined, percentSaving: undefined, priceBase, discounter: "Netto" };
+                    return { title, amount, price, priceOld: "", percentSaving: "", priceBase, discounter: "Netto" };
                 })
 
                 if (meatKeywords.some(word => offer.title.toLowerCase().includes(word))) offers.push(offer)

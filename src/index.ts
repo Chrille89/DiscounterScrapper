@@ -1,3 +1,4 @@
+import { Offer } from "./types/offer.type"
 import { getAldiOffers } from "./aldiOffers"
 import { getNettoDiscountOffers } from "./nettoDiscountOffers"
 import { getNettoOffers } from "./nettoOffers"
@@ -5,16 +6,23 @@ import { getPennyOffers } from "./pennyOffers";
 import { getReweOffers } from "./reweOffers";
 import { getNormaOffers } from "./normaOffers";
 import { getEdekaOffers } from "./edekaOffers";
-import { blacklist, meatKeywords, vegetablesKeywords } from './data/meatKeywords';
+import { blacklist, meatKeywords, vegetablesKeywords, supplementsKeywords , drinkKeywords} from './data/keywords';
 import { filterOffersByKeywords } from "./helper/offerFilter";
 import { getKauflandOffers } from "./kauflandOffers";
+import { getLidlOffers } from "./lidlOffers";
 
 (async () => {
     console.time("Load offers");
 
+
     // ALDI
     console.log("Loading ALDI offers...")
     let offers = await getAldiOffers()
+    
+    /*
+    // Lidl
+    console.log("Loading Lidl offers...")
+    offers?.push(...await getLidlOffers() ?? [])
 
     // NETTO Marken Discount
     console.log("Loading Netto Marken-Discount offers...")
@@ -49,28 +57,34 @@ import { getKauflandOffers } from "./kauflandOffers";
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=02_Obst__Gemuese__Pflanzen") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01_Fleisch__Gefluegel__Wurst") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01a_Frischer_Fisch") ?? [])
+    */
+    const offer : Offer = {
+        "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+        "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+        "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+        "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5)
+    }
     
-    const meatOffers = filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase)
+    console.log("Top 5 Offers: ", offer)
 
-    console.log("Top 5 Meat Offers: ", meatOffers)
-   // console.log("Top 5 Vegetables Offers: ", vegetablesOffers)
-
-   /*
-    let response = await fetch('http://h2857701.stratoserver.net:3001', {
+    let response = await fetch('http://localhost:3001', {
         method: 'DELETE'
     });
     console.log("DELETE-Response: ", await response.json())
 
-    response = await fetch('http://h2857701.stratoserver.net:3001', {
+    response = await fetch('http://localhost:3001', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(meatOffers),
+        body: JSON.stringify(offer),
     })
-    console.log("POST-Response: ", await response.json())*/
+    console.log("POST-Response: ", await response.json())
 
     console.timeEnd("Load offers");
-
+    return;
 })()

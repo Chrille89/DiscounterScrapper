@@ -1,6 +1,6 @@
 import { chromium } from "playwright-extra";
-import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { OfferInfo } from './types/offer.type';
+import { blacklist, meatKeywords } from "./data/keywords";
 
 export async function getKauflandOffers(url: string) {
     const browser = await chromium.launch({ headless: true });
@@ -35,7 +35,7 @@ export async function getKauflandOffers(url: string) {
         await page.waitForSelector(selector);
 
         // Alle ArtikelTiles auslesen 
-        const offers: Offer[] = await page.$$eval(".k-grid__item", nodes =>
+        const offers: OfferInfo[] = await page.$$eval(".k-grid__item", nodes =>
             nodes.map(n => {
                 const title = n.querySelector("div.k-product-tile__title")?.textContent?.trim() || '';
                 const subtitle = n.querySelector("div.k-product-tile__subtitle")?.textContent?.trim() || '';

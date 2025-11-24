@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import { Page } from 'playwright';
-import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from './data/meatKeywords';
+import { OfferInfo } from './types/offer.type';
+import { blacklist, meatKeywords } from './data/keywords';
 import { autoScroll } from './helper/autoScroll';
 import { filterOffersByKeywords } from './helper/offerFilter'
 
@@ -19,15 +19,15 @@ export async function getAldiOffers() {
 
         
         // Alle ArtikelTiles auslesen
-        const offers : Offer[] = await page.$$eval('[data-t-name="ArticleTile"]', nodes =>
+        const offers : OfferInfo[] = await page.$$eval('[data-t-name="ArticleTile"]', nodes =>
             nodes.map(n => {
                 const title = n.querySelector('.mod-article-tile__title')?.textContent?.trim() || '';
                 const amount = n.querySelector('.price__unit')?.textContent?.trim() || '';
                 const priceBaseStr = n.querySelector('.price__base')?.textContent?.trim().split("=")[1].replace(")","").replace(",",".").trim(); 
                 let priceBase = priceBaseStr?.includes("/") ? Number(priceBaseStr.split("/")[1].substring(0,4)) : Number(priceBaseStr?.substring(0,4))
                 const price = Number(n.querySelector('.price__wrapper')?.textContent?.trim().split("\n")[0]);
-                const priceOld =  n.querySelector('.price__previous')?.textContent?.trim(); 
-                const percentSaving = n.querySelector('.price__previous-percentage')?.textContent?.trim();
+                const priceOld =  n.querySelector('.price__previous')?.textContent?.trim() ?? ""; 
+                const percentSaving = n.querySelector('.price__previous-percentage')?.textContent?.trim() ?? "";
                 if (amount == "kg-Preis") priceBase = price
                 return { title, amount,price,priceOld, percentSaving, priceBase, discounter : "Aldi" };
             })

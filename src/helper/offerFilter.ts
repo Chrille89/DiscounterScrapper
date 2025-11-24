@@ -1,6 +1,6 @@
-import { Offer } from '../types/offer.type';
+import { OfferInfo } from '../types/offer.type';
 
-export function filterOffersByKeywords(offers: Offer[], keywords: string[], blacklist: string[]): Offer[] {
+export function filterOffersByKeywords(offers: OfferInfo[], keywords: string[], blacklist: string[]): OfferInfo[] {
     return offers.filter(
         (offer, index, self) =>
             (index === self.findIndex((o) => o.title === offer.title)) &&

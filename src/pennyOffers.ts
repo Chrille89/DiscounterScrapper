@@ -1,7 +1,7 @@
 
 import { chromium } from "playwright-extra";
-import { Offer } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/meatKeywords";
+import { OfferInfo } from './types/offer.type';
+import { blacklist, meatKeywords } from "./data/keywords";
 import { autoScroll } from "./helper/autoScroll";
 
 export async function getPennyOffers() {
@@ -25,7 +25,7 @@ export async function getPennyOffers() {
         await page.waitForSelector(selector)
 
         // Alle ArtikelTiles auslesen 
-        const offers: Offer[] = await page.$$eval('.tile-list__item', nodes =>
+        const offers: OfferInfo[] = await page.$$eval('.tile-list__item', nodes =>
             nodes.map(n => {
                 const title = n.querySelector(".h4.offer-tile__headline")?.textContent?.trim() || '';
                 const amount = n.querySelector(".offer-tile__unit-price")?.textContent?.trim().split("(")[0] || '';
