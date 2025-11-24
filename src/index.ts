@@ -14,12 +14,13 @@ import { getLidlOffers } from "./lidlOffers";
 (async () => {
     console.time("Load offers");
 
+    const backendUrl = "http://h2857701.stratoserver.net:3001/offer"
+    // const backendUrl = "http://localhost:3001/offer"
 
     // ALDI
     console.log("Loading ALDI offers...")
     let offers = await getAldiOffers()
     
-    /*
     // Lidl
     console.log("Loading Lidl offers...")
     offers?.push(...await getLidlOffers() ?? [])
@@ -57,7 +58,7 @@ import { getLidlOffers } from "./lidlOffers";
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=02_Obst__Gemuese__Pflanzen") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01_Fleisch__Gefluegel__Wurst") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01a_Frischer_Fisch") ?? [])
-    */
+    
     const offer : Offer = {
         "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
         .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
@@ -71,12 +72,12 @@ import { getLidlOffers } from "./lidlOffers";
     
     console.log("Top 5 Offers: ", offer)
 
-    let response = await fetch('http://localhost:3001', {
+    let response = await fetch(backendUrl, {
         method: 'DELETE'
     });
     console.log("DELETE-Response: ", await response.json())
 
-    response = await fetch('http://localhost:3001', {
+    response = await fetch(backendUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

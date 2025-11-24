@@ -20,6 +20,9 @@ export const meatKeywords = [
     "roulade",
     "steak",
     "geschnetzeltes",
+    "roastbeef",
+    "tafelspitz",
+    "cevapcici",
 
     // Geflügel
     "ente",
@@ -31,27 +34,27 @@ export const meatKeywords = [
     "huhn",
 
     // 🦌 Wild
-    "Rehfleisch",
-    "Hirschfleisch",
-    "Wildschweinfleisch",
-    "Hasenfleisch",
+    "rehfleisch",
+    "hirschfleisch",
+    "wildschweinfleisch",
+    "hasenfleisch",
 
     // 🐟 Fisch (Süß- & Salzwasser)
     "fisch",
-    "Lachs",
-    "Forelle",
-    "Kabeljau",
-    "Seelachs",
-    "Thunfisch",
-    "Heilbutt",
-    "Zander",
-    "Rotbarsch",
-    "Makrele",
-    "Sardine",
-    "Hering",
-    "Dorade",
-    "Barsch",
-    "Garnelen"
+    "lachs",
+    "forelle",
+    "kabeljau",
+    "seelachs",
+    "thunfisch",
+    "heilbutt",
+    "zander",
+    "rotbarsch",
+    "makrele",
+    "sardine",
+    "hering",
+    "dorade",
+    "barsch",
+    "garnelen"
 ];
 
 export const vegetablesKeywords = [
@@ -263,7 +266,10 @@ export const blacklist = [
     "heringsfiletröllchen",
     "thunfischfilets",
     "thunfisch-filets",
-    "gesundheitsbad"
-];
+    "gesundheitsbad",
+    "genussmomente",
+    "eiskönigin",
+    "puppe"
+  ];
 
 

@@ -52,7 +52,7 @@ export async function getKauflandOffers(url: string) {
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
     } finally {
-   //    await browser.close();
+        await browser.close();
     }
 }
 
