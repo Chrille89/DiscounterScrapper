@@ -20,10 +20,6 @@ import { getLidlOffers } from "./lidlOffers";
     // ALDI
     console.log("Loading ALDI offers...")
     let offers = await getAldiOffers()
-    
-    // Lidl
-    console.log("Loading Lidl offers...")
-    offers?.push(...await getLidlOffers() ?? [])
 
     // NETTO Marken Discount
     console.log("Loading Netto Marken-Discount offers...")

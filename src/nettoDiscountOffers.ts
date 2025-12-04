@@ -63,9 +63,7 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
                         priceBase: Number(div.querySelector(".product-property.product-property__base-price")?.textContent?.trim().split("/")[0]),
                         discounter: "Netto Marken-Discount"
                     }
-                    if (offer.amount == "1 kg" || offer.amount == "pro kg") offer.priceBase = offer.price
                     return offer;
-
                 }
                 )
             }
@@ -83,3 +81,4 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
         .sort((a, b) => a.priceBase - b.priceBase))
 })()
 */
+

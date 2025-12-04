@@ -4,6 +4,9 @@ import { OfferInfo } from './types/offer.type';
 import { blacklist, meatKeywords } from './data/keywords';
 import { autoScroll } from './helper/autoScroll';
 import { filterOffersByKeywords } from './helper/offerFilter'
+import { vegetablesKeywords } from './data/keywords';
+import { supplementsKeywords } from './data/keywords';
+import { drinkKeywords } from './data/keywords';
 
 export async function getAldiOffers() {
     const browser = await chromium.launch({ headless: true });
@@ -43,7 +46,16 @@ export async function getAldiOffers() {
 /*
 (async () => {
     let offers = await getAldiOffers()
-    console.log("Aldi offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase))
-})()*/
-
+     const offer = {
+            "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+            "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+            "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+            "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0,5)
+        }
+    console.log("Aldi offers loaded: ", offer)
+})()
+*/

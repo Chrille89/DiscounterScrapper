@@ -120,13 +120,7 @@ export const supplementsKeywords: string[] = [
   // hülsenfrüchte
   "linsen",
   "kichererbsen",
-  "bohnen",
-
-  // brot & gebäck (als grundbeilage)
-  "brot",
-  "baguette",
-  "fladenbrot",
-  "ciabatta"
+  "bohnen"
 ];
 
 export const drinkKeywords: string[] = [
@@ -224,6 +218,13 @@ export const drinkKeywords: string[] = [
   "jäger",
   "jever",
   "störtebeker",
+  "franziskaner",
+  "köstritzer",
+  "radeberger",
+  "clausthaler",
+  "ur-krostitzer",
+  "jubiläums pilsener",
+  "haseröder",
 
   // wein
   "weißwein",
@@ -233,26 +234,8 @@ export const drinkKeywords: string[] = [
   "sekt",
   "riesling",
   "merlot",
-  "cabernet sauvignon",
   "dornfelder",
   "lambrusco",
-  "fresita",
-  "mateus",
-
-  // spirituosen (grundgetränke)
-  "vodka",
-  "gin",
-  "rum",
-  "whisky",
-  "tequila",
-  "jägermeister",
-  "aperol",
-  "campari",
-  "baileys",
-  "havanna club",
-  "bacardi",
-  "absolut vodka",
-  "smirnoff"
 ];
 
 
@@ -269,7 +252,13 @@ export const blacklist = [
     "gesundheitsbad",
     "genussmomente",
     "eiskönigin",
-    "puppe"
+    "puppe",
+    "schraubendreher",
+    "transparente",
+    "baumwolle",
+    "elasthan",
+    "jeggings",
+    "maschine"
   ];
 
 
