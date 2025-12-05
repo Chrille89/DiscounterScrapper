@@ -1,6 +1,7 @@
 import { chromium } from "playwright-extra";
 import { OfferInfo } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/keywords";
+import { blacklist, meatKeywords ,vegetablesKeywords,drinkKeywords, supplementsKeywords} from "./data/keywords";
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 export async function getNettoOffers(url: string): Promise<OfferInfo[] | undefined> {
     const browser = await chromium.launch({ headless: true });
@@ -29,8 +30,7 @@ export async function getNettoOffers(url: string): Promise<OfferInfo[] | undefin
                     }
                     return { title, amount, price, priceOld: "", percentSaving: "", priceBase, discounter: "Netto" };
                 })
-
-                if (meatKeywords.some(word => offer.title.toLowerCase().includes(word))) offers.push(offer)
+                offers.push(offer)
                 index++;
             } catch (err) {
                 break;
@@ -50,7 +50,32 @@ export async function getNettoOffers(url: string): Promise<OfferInfo[] | undefin
     offers?.push(...await getNettoOffers("https://netto.de/angebote/regionale-produkte/") ?? [])
     offers?.push(...await getNettoOffers("https://netto.de/angebote/hammer-donnerstag/") ?? [])
     offers?.push(...await getNettoOffers("https://netto.de/angebote/knaller-wochenende/") ?? [])
-    console.log("Netto offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase))
+    const offer = {
+        "meatOffer": filterOffersByKeywords(offers ?? [], meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+        "vegetablesOffer": filterOffersByKeywords(offers ?? [], vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+        "supplementsOffer": filterOffersByKeywords(offers ?? [], supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+        "drinkOffer": filterOffersByKeywords(offers ?? [], drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase)
+    }
+    console.log("netto markendiscount offers offers loaded: ", offer)
+})()
+
+/*
+(async () => {
+    let offers = await getNettoDiscountOffers()
+     const offer = {
+            "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase)
+        }
+    console.log("netto markendiscount offers offers loaded: ", offer)
 })()
 */

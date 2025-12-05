@@ -2,6 +2,8 @@ import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { Page } from "playwright";
 import { OfferInfo } from './types/offer.type';
+import { blacklist, meatKeywords, vegetablesKeywords,supplementsKeywords , drinkKeywords} from "./data/keywords";
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 chromium.use(StealthPlugin());
 
@@ -63,6 +65,7 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
                         priceBase: Number(div.querySelector(".product-property.product-property__base-price")?.textContent?.trim().split("/")[0]),
                         discounter: "Netto Marken-Discount"
                     }
+                    if(offer.priceBase == 0) offer.priceBase = offer.price
                     return offer;
                 }
                 )
@@ -77,8 +80,18 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
 /*
 (async () => {
     let offers = await getNettoDiscountOffers()
-    console.log("Netto Marken-Discount offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase))
+     const offer = {
+            "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase)
+        }
+    console.log("netto markendiscount offers offers loaded: ", offer)
 })()
 */
+
 

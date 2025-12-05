@@ -62,7 +62,7 @@ export const vegetablesKeywords = [
     "zwiebeln",
     "knoblauch",
     "tomaten",
-    "gurken",
+    "gurke",
     "paprika",
     "zucchini",
     "auberginen",
