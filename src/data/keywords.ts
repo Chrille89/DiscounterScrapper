@@ -37,7 +37,6 @@ export const meatKeywords = [
     "reh",
     "hirsch",
     "wildschwein",
-    "hase",
 
     // 🐟 Fisch (Süß- & Salzwasser)
     "fisch",
@@ -59,11 +58,13 @@ export const meatKeywords = [
 
 export const vegetablesKeywords = [
     "karotten",
+    "möhren",
     "zwiebeln",
     "knoblauch",
     "tomaten",
     "gurke",
     "paprika",
+    "champignons",
     "zucchini",
     "auberginen",
     "brokkoli",
@@ -258,7 +259,13 @@ export const blacklist = [
     "baumwolle",
     "elasthan",
     "jeggings",
-    "maschine"
+    "maschine",
+    "zunge",
+    "innereien",
+    "knallerbsen",
+    "shots",
+    "wildpreiselbeeren",
+    "butter"
   ];
 
 

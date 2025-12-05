@@ -3,6 +3,10 @@ import { chromium } from "playwright-extra";
 import { OfferInfo } from './types/offer.type';
 import { blacklist, meatKeywords } from "./data/keywords";
 import { autoScroll } from "./helper/autoScroll";
+import { filterOffersByKeywords } from "./helper/offerFilter"
+import { vegetablesKeywords } from "./data/keywords";
+import { supplementsKeywords } from "./data/keywords";
+import { drinkKeywords } from "./data/keywords";    
 
 export async function getPennyOffers() {
     const browser = await chromium.launch({ headless: true });
@@ -49,7 +53,16 @@ export async function getPennyOffers() {
 /*
 (async () => {
     let offers = await getPennyOffers()
-    console.log("Penny offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase))
+    const offer = {
+            "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase)
+        }
+    console.log("penny offers loaded: ", offer)
 })()
 */

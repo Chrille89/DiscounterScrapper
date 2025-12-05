@@ -80,7 +80,7 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
 /*
 (async () => {
     let offers = await getNettoDiscountOffers()
-     const offer = {
+    const offer = {
             "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
             .sort((a, b) => a.priceBase - b.priceBase),
             "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)

@@ -46,7 +46,7 @@ export async function getAldiOffers() {
 /*
 (async () => {
     let offers = await getAldiOffers()
-     const offer = {
+    const offer = {
             "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
             .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
             "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
