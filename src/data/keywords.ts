@@ -23,6 +23,7 @@ export const meatKeywords = [
     "roastbeef",
     "tafelspitz",
     "cevapcici",
+    "patties",
 
     // Geflügel
     "ente",
@@ -64,7 +65,6 @@ export const vegetablesKeywords = [
     "tomaten",
     "gurke",
     "paprika",
-    "champignons",
     "zucchini",
     "auberginen",
     "brokkoli",
@@ -76,7 +76,6 @@ export const vegetablesKeywords = [
     "lauch",
     "porree",
     "rote bete",
-    "mais",
     "erbsen",
     "bohnen",
     "wirsing",
@@ -88,12 +87,10 @@ export const vegetablesKeywords = [
     "eisbergsalat",
     "kopfsalat",
     "pilze",
+    "champignons",
     "spargel grün",
     "spargel weiß",
     "kürbis",
-    "fenchel",
-    "radieschen",
-    "chili",
     "ingwer"
 ];
 
@@ -131,7 +128,6 @@ export const drinkKeywords: string[] = [
   "stilles wasser",
   "volvic",
   "vittel",
-  "evian",
   "gerolsteiner",
   "apollinaris",
   "selters",
@@ -142,10 +138,7 @@ export const drinkKeywords: string[] = [
   "sojamilch",
   "mandelmilch",
   "kokosmilch",
-  "laktosefreie milch",
-  "oatly",
   "alpro",
-  "berief",
 
   // saft
   "orangensaft",
@@ -171,34 +164,13 @@ export const drinkKeywords: string[] = [
   "mezzo mix",
   "spezi",
   "schweppes",
-  "bionade",
-  "club mate",
-  "vitamalz",
-  "rivella",
   "red bull",
-
-  // tee
-  "schwarzer tee",
-  "grüner tee",
-  "kräutertee",
-  "früchtetee",
-  "pfefferminztee",
-  "kamillentee",
-  "lipton",
-  "teekanne",
-  "yogi tea",
 
   // kaffee
   "kaffee",
-  "espresso",
-  "cappuccino",
-  "latte macchiato",
   "dallmayr",
-  "lavazza",
-  "illy",
   "tchibo",
   "jacobs",
-  "nescafé",
 
   // bier
   "bier",
@@ -236,10 +208,8 @@ export const drinkKeywords: string[] = [
   "riesling",
   "merlot",
   "dornfelder",
-  "lambrusco",
+  "lambrusco"
 ];
-
-
 
 export const blacklist = [
     "enteiser",
@@ -262,10 +232,24 @@ export const blacklist = [
     "maschine",
     "zunge",
     "innereien",
+    "leber",
+    "nieren",
+    "magen",
+    "herz",
     "knallerbsen",
     "shots",
     "wildpreiselbeeren",
-    "butter"
+    "butter",
+    "schokolade",
+    "alpen",
+    "pudding",
+    "terrine",
+    "kapseln",
+    "pads",
+    "spezialitäten",
+    "paprika pommes",
+    "paprikasalami",
+    "knoblauchwurst"
   ];
 
 

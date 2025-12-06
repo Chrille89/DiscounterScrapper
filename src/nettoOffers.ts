@@ -60,22 +60,6 @@ export async function getNettoOffers(url: string): Promise<OfferInfo[] | undefin
         "drinkOffer": filterOffersByKeywords(offers ?? [], drinkKeywords, blacklist)
             .sort((a, b) => a.priceBase - b.priceBase)
     }
-    console.log("netto markendiscount offers offers loaded: ", offer)
-})()
-
-/*
-(async () => {
-    let offers = await getNettoDiscountOffers()
-     const offer = {
-            "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-            .sort((a, b) => a.priceBase - b.priceBase),
-            "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
-            .sort((a, b) => a.priceBase - b.priceBase),
-            "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
-            .sort((a, b) => a.priceBase - b.priceBase),
-            "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
-            .sort((a, b) => a.priceBase - b.priceBase)
-        }
-    console.log("netto markendiscount offers offers loaded: ", offer)
+    console.log("netto markendiscount offers loaded: ", offer)
 })()
 */

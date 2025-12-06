@@ -90,7 +90,7 @@ async function getProductOffersByPage(page: Page, pageNumber: number = 0) {
             "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
             .sort((a, b) => a.priceBase - b.priceBase)
         }
-    console.log("netto markendiscount offers offers loaded: ", offer)
+    console.log("netto markendiscount offers loaded: ", offer)
 })()
 */
 
