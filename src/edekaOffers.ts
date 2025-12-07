@@ -1,7 +1,8 @@
 import { chromium } from "playwright-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { OfferInfo } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/keywords";
+import { blacklist, meatKeywords, vegetablesKeywords, supplementsKeywords, drinkKeywords } from "./data/keywords";
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 chromium.use(StealthPlugin());
 
@@ -52,8 +53,15 @@ export async function getEdekaOffers() {
 /*
 (async () => {
     let offers = await getEdekaOffers()
-    console.log("Edeka offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase))
-})()
-*/
-
+    const offer = {
+            "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase)
+        }
+    console.log("Edeka offers loaded: ", offer)
+})()*/

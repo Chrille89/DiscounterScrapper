@@ -10,6 +10,7 @@ export const meatKeywords = [
     "kasseler",
     "rücken",
     "braten",
+    "krustenbraten",
     "hack",
     "schwein",
     "rind",
@@ -21,6 +22,7 @@ export const meatKeywords = [
     "steak",
     "geschnetzeltes",
     "roastbeef",
+    "rumpsteak",
     "tafelspitz",
     "cevapcici",
     "patties",
@@ -246,10 +248,21 @@ export const blacklist = [
     "terrine",
     "kapseln",
     "pads",
-    "spezialitäten",
+    "spezial",
     "paprika pommes",
     "paprikasalami",
-    "knoblauchwurst"
+    "knoblauchwurst",
+    "tomatenketchup",
+    "tomatenmark",
+    "schlauch",
+    "pressexzenter",
+    "rückenbandage",
+    "dreh",
+    "fein gehackt",
+    "kaffeesticks",
+    "gläser",
+    "handbrause",
+    "öl"
   ];
 
 
