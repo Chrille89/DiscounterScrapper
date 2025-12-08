@@ -1,6 +1,8 @@
 import { chromium } from "playwright-extra";
 import { OfferInfo } from './types/offer.type';
-import { blacklist, meatKeywords } from "./data/keywords";
+import { blacklist, meatKeywords, vegetablesKeywords, supplementsKeywords, drinkKeywords
+ } from "./data/keywords";
+import { filterOffersByKeywords } from "./helper/offerFilter";
 
 export async function getKauflandOffers(url: string) {
     const browser = await chromium.launch({ headless: true });
@@ -63,6 +65,16 @@ export async function getKauflandOffers(url: string) {
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=02_Obst__Gemuese__Pflanzen") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01_Fleisch__Gefluegel__Wurst") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01a_Frischer_Fisch") ?? [])
-    console.log("Kaufland offers loaded: ", filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase))
-})()*/
+    const offer = {
+            "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase),
+            "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase)
+        }
+    console.log("Kaufland offers loaded: ", offer)
+})()
+*/

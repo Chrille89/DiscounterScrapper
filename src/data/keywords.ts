@@ -116,11 +116,10 @@ export const supplementsKeywords: string[] = [
   "spaghetti",
   "penne",
   "fusilli",
-
-  // hülsenfrüchte
-  "linsen",
-  "kichererbsen",
-  "bohnen"
+  "farfalle",
+  "maccheroni",
+  "tagliatelle",
+  "lasagne"
 ];
 
 export const drinkKeywords: string[] = [
@@ -190,7 +189,6 @@ export const drinkKeywords: string[] = [
   "erdinger",
   "augustiner",
   "spaten",
-  "jäger",
   "jever",
   "störtebeker",
   "franziskaner",
@@ -243,6 +241,7 @@ export const blacklist = [
     "wildpreiselbeeren",
     "butter",
     "schokolade",
+    "chocolate",
     "alpen",
     "pudding",
     "terrine",
@@ -262,7 +261,14 @@ export const blacklist = [
     "kaffeesticks",
     "gläser",
     "handbrause",
-    "öl"
+    "öl",
+    "wassersprudler",
+    "kartuschen",
+    "mundwasser",
+    "kaffeelikör",
+    "tischwasserfilter",
+    "kaffeebecher",
+    "reiskocher"
   ];
 
 
