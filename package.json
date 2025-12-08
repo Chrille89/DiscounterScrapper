@@ -21,19 +21,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
     "@types/node": "^24.9.2",
     "playwright": "^1.56.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "fs-extra": "^11.3.2",
-    "node-tesseract-ocr": "^2.2.1",
-    "pdf-parse": "^2.4.5",
     "pdfjs-dist": "^5.4.394",
     "playwright-extra": "^4.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "sharp": "^0.34.5"
+    "puppeteer": "^24.32.1",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
