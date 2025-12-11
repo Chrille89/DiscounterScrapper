@@ -66,8 +66,6 @@ import { getLidlOffers } from "./lidlOffers";
         .sort((a, b) => a.priceBase - b.priceBase).slice(0,5)
     }
     
-    console.log("Top 5 Offers: ", offer)
-
     let response = await fetch(backendUrl, {
         method: 'DELETE'
     });

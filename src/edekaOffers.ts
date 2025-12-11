@@ -16,7 +16,7 @@ export async function getEdekaOffers() {
 
         await page.goto("https://www.edeka.de/eh/minden-hannover/edeka-klausner-brandenburger-str.-30-31/angebote-10003328-resp.jsp", { waitUntil: "domcontentloaded" });
 
-        await page.waitForSelector(selector, { state: "attached", timeout: 30000 })
+        await page.waitForSelector(selector)
 
         const offers: OfferInfo[] = await page.$$eval(".css-1uiiw0z", nodes =>
             nodes.map(n => {
@@ -64,4 +64,5 @@ export async function getEdekaOffers() {
             .sort((a, b) => a.priceBase - b.priceBase)
         }
     console.log("Edeka offers loaded: ", offer)
-})()*/
+})()
+*/

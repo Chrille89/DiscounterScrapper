@@ -268,7 +268,14 @@ export const blacklist = [
     "kaffeelikör",
     "tischwasserfilter",
     "kaffeebecher",
-    "reiskocher"
+    "reiskocher",
+    "cat",
+    "katze",
+    "dog",
+    "hund",
+    "tiernahrung",
+    "chocolat",
+    "knabber"
   ];
 
 

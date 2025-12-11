@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.9.2",
-    "playwright": "1.32",
+    "playwright": "^1.57.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },

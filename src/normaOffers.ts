@@ -53,15 +53,12 @@ export async function getNormaOffers() {
         await page.waitForSelector(".subnav.subnav-1")
         await page.click('#js-getheight > li.l-42.lvl-1.active > ul > li:nth-child(3)')
 
-        // switch to /dauerhaft-beste-preis-leistung
-       // await page.click(".selectize-input.items.not-full.has-options")
-        await page.click('#js-getheight > li.l-42.lvl-1.active > ul > li.lvl-2.active > a')
-
         await page.waitForSelector(".b463.produktBoxContainer", { state: "attached", timeout: 30000 })
 
         // Alle ArtikelTiles auslesen
         const offers: OfferInfo[] = await page.$$eval('.b463.produktBoxContainer', nodes =>
-            nodes.map(n => {
+            nodes.map(n => { 
+                const supplier = n.querySelector(".supplier")?.textContent?.trim() || '';
                 const title = n.querySelector(".produktBox-txt-headline")?.textContent?.trim() || '';
                 const amount = n.querySelector(".produktBox-txt-inh")?.textContent?.trim() || '';
                 const price = Number(n.querySelector(".produktBox-cont-wrapper-price")?.textContent?.trim().replace(",", ".").replace("*", ""))
@@ -69,7 +66,7 @@ export async function getNormaOffers() {
                 let splittedPriceOld = n.querySelector(".produktBox-txt-price")?.textContent?.trim().split("/")[0].split("=")[1]
                 const priceBase = splittedPriceOld ? Number(splittedPriceOld.replace(/[A-Za-zÄÖÜäöüß()\s]/g, "").replace(",",".")): 0
                 const percentSaving = n.querySelector(".produktBox-cont-wrapper-billiger")?.textContent?.trim() || '';
-                return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Norma" };
+                return { title: supplier + " " + title, amount, price, priceOld, percentSaving, priceBase, discounter: "Norma" };
             })
         );
         return offers
@@ -96,3 +93,4 @@ export async function getNormaOffers() {
     console.log("norma offers loaded: ", offer)
 })()
 */
+

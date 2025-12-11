@@ -17,7 +17,7 @@ export async function getReweOffers() {
 
         await page.goto("https://www.rewe.de/angebote/potsdam-golm/4040421/rewe-markt-in-der-feldmark-3a/?icid=marktseiten_rewe-de%3Amarktseite-4040421_int_angebote_rewe-de%3Aangebote_nn_nn_nn_nn", { waitUntil: "domcontentloaded" });
 
-        await page.waitForSelector(selector, { state: "attached", timeout: 5000 })
+        await page.waitForSelector(selector)
 
         await autoScroll(page)
 
