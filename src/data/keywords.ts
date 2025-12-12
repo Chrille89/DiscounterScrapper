@@ -275,7 +275,8 @@ export const blacklist = [
     "hund",
     "tiernahrung",
     "chocolat",
-    "knabber"
+    "knabber",
+    "teig"
   ];
 
 
