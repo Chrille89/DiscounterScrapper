@@ -65,7 +65,9 @@ import { getLidlOffers } from "./lidlOffers";
         "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
         .sort((a, b) => a.priceBase - b.priceBase).slice(0,5)
     }
-    
+
+    console.log("Offers loaded: ", offer);
+    /*
     let response = await fetch(backendUrl, {
         method: 'DELETE'
     });
@@ -79,7 +81,7 @@ import { getLidlOffers } from "./lidlOffers";
         body: JSON.stringify(offer),
     })
     console.log("POST-Response: ", await response.json())
-
+*/
     console.timeEnd("Load offers");
     return;
 })()
