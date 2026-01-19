@@ -277,7 +277,8 @@ export const blacklist = [
     "chocolat",
     "knabber",
     "teig",
-    "nackenstützkissen"
+    "kissen",
+    "slip"
   ];
 
 
