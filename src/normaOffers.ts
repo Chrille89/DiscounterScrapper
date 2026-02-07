@@ -43,7 +43,7 @@ export async function getNormaOffers() {
 
     try {
 
-        await page.goto("https://www.norma-online.de", { waitUntil: "networkidle" });
+        await page.goto("https://www.norma-online.de", { waitUntil: "domcontentloaded" });
 
         // accept cookies and close popup
         await page.click('[data-testid="uc-accept-all-button"]')

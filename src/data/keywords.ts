@@ -278,7 +278,12 @@ export const blacklist = [
     "knabber",
     "teig",
     "kissen",
-    "slip"
+    "slip",
+    "suppe",
+    "rama",
+    "hälse",
+    "eisbergsalat",
+    "kürbiskernbrötchen"
   ];
 
 
