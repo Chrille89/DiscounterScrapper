@@ -283,7 +283,8 @@ export const blacklist = [
     "rama",
     "hälse",
     "eisbergsalat",
-    "kürbiskernbrötchen"
+    "kürbiskernbrötchen",
+    "tasche"
   ];
 
 
