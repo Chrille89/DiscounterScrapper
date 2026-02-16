@@ -285,7 +285,8 @@ export const blacklist = [
     "eisbergsalat",
     "kürbiskernbrötchen",
     "tasche",
-    "blümchen"
+    "blümchen",
+    "exzenterschleifpapier"
   ];
 
 
