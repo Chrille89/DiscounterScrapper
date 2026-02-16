@@ -53,7 +53,7 @@ export async function getNormaOffers() {
         await page.waitForSelector(".subnav.subnav-1")
         await page.click('#js-getheight > li.l-42.lvl-1.active > ul > li:nth-child(3)')
 
-        await page.waitForSelector(".b463.produktBoxContainer", { state: "attached", timeout: 30000 })
+        await page.waitForSelector(".b463.produktBoxContainer", { state: "attached", timeout: 60000 })
 
         // Alle ArtikelTiles auslesen
         const offers: OfferInfo[] = await page.$$eval('.b463.produktBoxContainer', nodes =>
