@@ -281,7 +281,9 @@ export const blacklist = [
     "kürbiskernbrötchen",
     "tasche",
     "blümchen",
-    "exzenterschleifpapier"
+    "exzenterschleifpapier",
+    "kohlroulade",
+    "klopse"
   ];
 
 
