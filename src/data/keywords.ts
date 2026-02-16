@@ -44,18 +44,8 @@ export const meatKeywords = [
     // 🐟 Fisch (Süß- & Salzwasser)
     "fisch",
     "lachs",
-    "forelle",
-    "kabeljau",
     "seelachs",
-    "thunfisch",
-    "heilbutt",
-    "zander",
-    "rotbarsch",
-    "makrele",
-    "sardine",
     "hering",
-    "dorade",
-    "barsch",
     "garnelen"
 ];
 
