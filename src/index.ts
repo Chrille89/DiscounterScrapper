@@ -57,13 +57,13 @@ import { getLidlOffers } from "./lidlOffers";
     
     const offer : Offer = {
         "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10),
         "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10),
         "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5),
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10),
         "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,5)
+        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10)
     }
 
     console.log("Offers loaded: ", offer);
