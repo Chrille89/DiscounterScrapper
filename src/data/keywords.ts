@@ -283,7 +283,8 @@ export const blacklist = [
     "blümchen",
     "exzenterschleifpapier",
     "kohlroulade",
-    "klopse"
+    "klopse",
+    "clemente"
   ];
 
 
