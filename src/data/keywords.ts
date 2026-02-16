@@ -9,12 +9,13 @@ export const meatKeywords = [
     "kotelett",
     "kasseler",
     "rücken",
+    "kamm",
     "braten",
     "krustenbraten",
     "hack",
     "schwein",
     "rind",
-    "filet",
+    "schweinefilet",
     "schnitzel",
     "gulasch",
     "chicken",
@@ -43,9 +44,13 @@ export const meatKeywords = [
 
     // 🐟 Fisch (Süß- & Salzwasser)
     "fisch",
+    "fischfilet",
     "lachs",
+    "lachsfilet",
     "seelachs",
+    "seelachsfilet",
     "hering",
+    "heringsfilet",
     "garnelen"
 ];
 
