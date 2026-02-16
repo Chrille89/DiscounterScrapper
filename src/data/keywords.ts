@@ -213,8 +213,6 @@ export const blacklist = [
     "plätzchenteig",
     "experimente",
     "heringsfiletröllchen",
-    "thunfischfilets",
-    "thunfisch-filets",
     "gesundheitsbad",
     "genussmomente",
     "eiskönigin",
@@ -285,7 +283,8 @@ export const blacklist = [
     "kohlroulade",
     "klopse",
     "clemente",
-    "ofenfrische"
+    "ofenfrische",
+    "thunfisch"
   ];
 
 
