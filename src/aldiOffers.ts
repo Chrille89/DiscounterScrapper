@@ -23,12 +23,10 @@ export async function getAldiOffers() {
             'div[data-testid="product-tile-grid"]',
             grids => {
                 const result: OfferInfo[] = []; // <-- Array im Browser-Kontext
-
                 grids.forEach(grid => {
                     const tiles = grid.querySelectorAll(
                         '[data-testid*="product-tile-grid-product-tile-"]'
                     );
-
                     tiles.forEach(tile => {
                         const title =
                             tile.querySelector('[data-testid$="-product-name"]')
@@ -38,13 +36,29 @@ export async function getAldiOffers() {
                             tile.querySelector('[data-testid$="-tag-sales-unit"]')
                                 ?.textContent?.trim() || "";
 
+                        const price =
+                            tile.querySelector('[data-testid$="-tag-current-price-amount"]')
+                                ?.textContent?.trim() || "";
+
+                        const priceOld =
+                            tile.querySelector('[data-testid$="-tag-cross-price-label"]')
+                                ?.textContent?.trim() || "";
+                            
+                        const percentSaving =       
+                            tile.querySelector('[data-testid$="-tag-promo-label"]')
+                                ?.textContent?.trim() || "";4
+                        
+                        const priceBase =
+                            tile.querySelector('[data-testid$="-tag-base-price"]')
+                                ?.textContent?.trim() || "";
+                               
                         result.push({
                             title,
                             amount,
-                            price: 0,
-                            priceOld: "",
-                            percentSaving: "",
-                            priceBase: 0,
+                            price: Number(price.replace(/[^\d,.,-]/g, "").replace("-", "")),
+                            priceOld,
+                            percentSaving,
+                            priceBase: Number(priceBase.replace(/[^\d,.,-]/g, "").replace("-", "")),
                             discounter: "Aldi"
                         });
                     });
@@ -53,25 +67,6 @@ export async function getAldiOffers() {
                 return result; // <-- das geht zurück nach Node.js
             }
         );
-
-        /*
-
-console.log("title: ", title)
-        const amount =
-          n.querySelector('[data-testid$="-tag-sales-unit"]')
-            ?.textContent?.trim() || "";
-console.log("amount: ", amount)
-                const priceBaseStr = n.querySelector('.price__base')?.textContent?.trim().split("=")[1].replace(")","").replace(",",".").trim(); 
-                let priceBase = priceBaseStr?.includes("/") ? Number(priceBaseStr.split("/")[1].substring(0,4)) : Number(priceBaseStr?.substring(0,4))
-                const price = Number(n.querySelector('.price__wrapper')?.textContent?.trim().split("\n")[0]);
-                const priceOld =  n.querySelector('.price__previous')?.textContent?.trim() ?? ""; 
-                const percentSaving = n.querySelector('.price__previous-percentage')?.textContent?.trim() ?? "";
-                if (amount == "kg-Preis") priceBase = price
-                return { title, amount,price,priceOld, percentSaving, priceBase, discounter : "Aldi" };
-            })
-        }
-
-        );*/
         console.log("Aldi offers loaded: ", offers)
         return offers
     } catch (err) {

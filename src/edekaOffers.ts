@@ -38,7 +38,7 @@ export async function getEdekaOffers() {
                         calculatedPriceBase = price
                     }
                 }
-                const priceBase = calculatedPriceBase.toFixed(2) as unknown as number
+                const priceBase = Number(calculatedPriceBase.toFixed(2) as unknown as number)
                 return { title, amount, price, priceOld, percentSaving, priceBase, discounter: "Edeka Branbenburger Str." };
             })
         );
@@ -50,7 +50,6 @@ export async function getEdekaOffers() {
     }
 }
 
-/*
 (async () => {
     let offers = await getEdekaOffers()
     const offer = {
@@ -65,4 +64,3 @@ export async function getEdekaOffers() {
         }
     console.log("Edeka offers loaded: ", offer)
 })()
-*/

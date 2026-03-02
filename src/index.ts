@@ -9,7 +9,6 @@ import { getEdekaOffers } from "./edekaOffers";
 import { blacklist, meatKeywords, vegetablesKeywords, supplementsKeywords , drinkKeywords} from './data/keywords';
 import { filterOffersByKeywords } from "./helper/offerFilter";
 import { getKauflandOffers } from "./kauflandOffers";
-import { getLidlOffers } from "./lidlOffers";
 
 (async () => {
     console.time("Load offers");
