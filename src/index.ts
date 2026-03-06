@@ -76,7 +76,7 @@ import { getKauflandOffers } from "./kauflandOffers";
     }
 
     console.log("Offers loaded: ", offer);
-    /*
+    
     let response = await fetch(backendUrl, {
         method: 'DELETE'
     });
@@ -90,7 +90,6 @@ import { getKauflandOffers } from "./kauflandOffers";
         body: JSON.stringify(offer),
     })
     console.log("POST-Response: ", await response.json())
-*/
     console.timeEnd("Load offers");
     return;
 })()
