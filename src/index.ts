@@ -44,13 +44,14 @@ import { getKauflandOffers } from "./kauflandOffers";
     }
 
     // Norma
+    /*
     try {
         console.log("Loading Norma offers...")
         offers?.push(...await getNormaOffers() ?? [])
     } catch (err) {
         console.error("Error loading Norma offers: ", err)
         offers?.push(...await getNormaOffers() ?? [])
-    }
+    }*/
 
     // Edeka Brandenburger Str. 
     //console.log("Loading Edeka offers...")
