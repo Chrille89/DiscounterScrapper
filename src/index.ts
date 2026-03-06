@@ -31,8 +31,13 @@ import { getKauflandOffers } from "./kauflandOffers";
     offers?.push(...await getNettoOffers("https://netto.de/angebote/hammer-donnerstag/") ?? [])
 
     // PENNY
-    console.log("Loading Penny offers...")
-    offers?.push(...await getPennyOffers() ?? [])
+    try {
+        console.log("Loading Penny offers...")
+        offers?.push(...await getPennyOffers() ?? [])
+    } catch (err) {
+        console.error("Error loading Penny offers: ", err)
+        offers?.push(...await getPennyOffers() ?? [])
+    }
 
     // Rewe
     try {
@@ -77,7 +82,7 @@ import { getKauflandOffers } from "./kauflandOffers";
     }
 
     console.log("Offers loaded: ", offer);
-    
+
     let response = await fetch(backendUrl, {
         method: 'DELETE'
     });
