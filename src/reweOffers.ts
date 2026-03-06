@@ -58,5 +58,4 @@ export async function getReweOffers() {
             .sort((a, b) => a.priceBase - b.priceBase)
         }
     console.log("rewe offers loaded: ", offer)
-})()
-*/
+})()*/

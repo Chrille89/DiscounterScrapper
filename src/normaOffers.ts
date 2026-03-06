@@ -72,6 +72,7 @@ export async function getNormaOffers() {
         return offers
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
+        throw err;
     } finally {
         await browser.close();
     }
@@ -93,4 +94,5 @@ export async function getNormaOffers() {
     console.log("norma offers loaded: ", offer)
 })()
 */
+
 

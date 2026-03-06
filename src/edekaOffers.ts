@@ -7,7 +7,7 @@ import { filterOffersByKeywords } from "./helper/offerFilter";
 chromium.use(StealthPlugin());
 
 export async function getEdekaOffers() {
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ headless: false });
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -16,7 +16,7 @@ export async function getEdekaOffers() {
 
         await page.goto("https://www.edeka.de/eh/minden-hannover/edeka-klausner-brandenburger-str.-30-31/angebote-10003328-resp.jsp", { waitUntil: "domcontentloaded" });
 
-        await page.waitForSelector(selector)
+       // await page.waitForSelector(selector)
 
         const offers: OfferInfo[] = await page.$$eval(".css-1uiiw0z", nodes =>
             nodes.map(n => {
@@ -50,6 +50,7 @@ export async function getEdekaOffers() {
     }
 }
 
+/*
 (async () => {
     let offers = await getEdekaOffers()
     const offer = {
@@ -64,3 +65,4 @@ export async function getEdekaOffers() {
         }
     console.log("Edeka offers loaded: ", offer)
 })()
+*/

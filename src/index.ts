@@ -6,7 +6,7 @@ import { getPennyOffers } from "./pennyOffers";
 import { getReweOffers } from "./reweOffers";
 import { getNormaOffers } from "./normaOffers";
 import { getEdekaOffers } from "./edekaOffers";
-import { blacklist, meatKeywords, vegetablesKeywords, supplementsKeywords , drinkKeywords} from './data/keywords';
+import { blacklist, meatKeywords, vegetablesKeywords, supplementsKeywords, drinkKeywords } from './data/keywords';
 import { filterOffersByKeywords } from "./helper/offerFilter";
 import { getKauflandOffers } from "./kauflandOffers";
 
@@ -35,16 +35,26 @@ import { getKauflandOffers } from "./kauflandOffers";
     offers?.push(...await getPennyOffers() ?? [])
 
     // Rewe
-    console.log("Loading Rewe offers...")
-    offers?.push(...await getReweOffers() ?? [])
+    try {
+        console.log("Loading Rewe offers...")
+        offers?.push(...await getReweOffers() ?? [])
+    } catch (err) {
+        console.error("Error loading Rewe offers: ", err)
+        offers?.push(...await getReweOffers() ?? [])
+    }
 
     // Norma
-    console.log("Loading Norma offers...")
-    offers?.push(...await getNormaOffers() ?? [])
+    try {
+        console.log("Loading Norma offers...")
+        offers?.push(...await getNormaOffers() ?? [])
+    } catch (err) {
+        console.error("Error loading Norma offers: ", err)
+        offers?.push(...await getNormaOffers() ?? [])
+    }
 
     // Edeka Brandenburger Str. 
-    console.log("Loading Edeka offers...")
-    offers?.push(...await getEdekaOffers() ?? [])
+    //console.log("Loading Edeka offers...")
+    // offers?.push(...await getEdekaOffers() ?? [])
 
     // Kaufland Zeppelinstraße
     console.log("Loading Kaufland offers...");
@@ -53,16 +63,16 @@ import { getKauflandOffers } from "./kauflandOffers";
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=02_Obst__Gemuese__Pflanzen") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01_Fleisch__Gefluegel__Wurst") ?? [])
     offers?.push(...await getKauflandOffers("https://filiale.kaufland.de/angebote/uebersicht.html?kloffer-category=01a_Frischer_Fisch") ?? [])
-    
-    const offer : Offer = {
-        "meatOffer":  filterOffersByKeywords(offers ?? [] , meatKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10),
-        "vegetablesOffer":  filterOffersByKeywords(offers ?? [] , vegetablesKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10),
-        "supplementsOffer":  filterOffersByKeywords(offers ?? [] , supplementsKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10),
-        "drinkOffer":  filterOffersByKeywords(offers ?? [] , drinkKeywords, blacklist)
-        .sort((a, b) => a.priceBase - b.priceBase).slice(0,10)
+
+    const offer: Offer = {
+        "meatOffer": filterOffersByKeywords(offers ?? [], meatKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0, 10),
+        "vegetablesOffer": filterOffersByKeywords(offers ?? [], vegetablesKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0, 10),
+        "supplementsOffer": filterOffersByKeywords(offers ?? [], supplementsKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0, 10),
+        "drinkOffer": filterOffersByKeywords(offers ?? [], drinkKeywords, blacklist)
+            .sort((a, b) => a.priceBase - b.priceBase).slice(0, 10)
     }
 
     console.log("Offers loaded: ", offer);

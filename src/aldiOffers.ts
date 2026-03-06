@@ -1,15 +1,8 @@
 import { chromium } from 'playwright';
-import { Page } from 'playwright';
 import { OfferInfo } from './types/offer.type';
-import { blacklist, meatKeywords } from './data/keywords';
-import { autoScroll } from './helper/autoScroll';
-import { filterOffersByKeywords } from './helper/offerFilter'
-import { vegetablesKeywords } from './data/keywords';
-import { supplementsKeywords } from './data/keywords';
-import { drinkKeywords } from './data/keywords';
 
 export async function getAldiOffers() {
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
     try {
@@ -67,7 +60,6 @@ export async function getAldiOffers() {
                 return result; // <-- das geht zurück nach Node.js
             }
         );
-        console.log("Aldi offers loaded: ", offers)
         return offers
     } catch (err) {
         console.error('Fehler beim Abrufen der Angebote:', err);
@@ -76,7 +68,7 @@ export async function getAldiOffers() {
     }
 }
 
-
+/*
 (async () => {
     let offers = await getAldiOffers()
     const offer = {
@@ -91,4 +83,5 @@ export async function getAldiOffers() {
     }
     console.log("Aldi offers loaded: ", offer)
 })()
+*/
 
